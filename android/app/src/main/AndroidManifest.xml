@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kelompok_4_task_learn">
    <application
-        android:label="kelompok_4_task_learn"
+        android:label="Task Learn"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

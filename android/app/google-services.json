@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "673463292336",
+    "firebase_url": "https://task-learn-a944a-default-rtdb.firebaseio.com",
+    "project_id": "task-learn-a944a",
+    "storage_bucket": "task-learn-a944a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673463292336:android:94575c55dfae79b643c675",
+        "android_client_info": {
+          "package_name": "com.example.kelompok_4_task_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673463292336-vcqstr6ea47d9p1j27er529qog3rnaoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyW2ANjvnJv5ONNi5TnlmOyo8VwA6be7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673463292336-vcqstr6ea47d9p1j27er529qog3rnaoj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "673463292336-4aso0htfqn0nfl4bcdui6l8ghokmkkql.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kelompok4TaskLearn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

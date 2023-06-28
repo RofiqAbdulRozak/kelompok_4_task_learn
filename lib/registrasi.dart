@@ -11,6 +11,8 @@ class RegistrasiPage extends StatefulWidget {
 
 class _RegistrasiPageState extends State<RegistrasiPage> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -57,16 +59,14 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _passwordController,
-                obscureText: true,
+                controller: _nameController,
                 decoration: const InputDecoration(
                   labelText: 'Nama Lengkap',
                 ),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _passwordController,
-                obscureText: true,
+                controller: _usernameController,
                 decoration: const InputDecoration(
                   labelText: 'Username',
                 ),

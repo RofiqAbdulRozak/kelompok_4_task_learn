@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'login.dart'; // Ganti dengan file form login Anda
+import 'login.dart';
 
 class splash extends StatelessWidget {
   @override
@@ -8,9 +8,7 @@ class splash extends StatelessWidget {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (BuildContext context) =>
-                LoginPage()), // Ganti LoginForm dengan widget login Anda
+        MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
       );
     });
 

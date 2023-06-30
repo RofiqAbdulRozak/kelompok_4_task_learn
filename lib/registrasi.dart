@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrasiPage extends StatefulWidget {
   const RegistrasiPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String _registrationMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,6 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
         title: const Text('Login'),
       ),
       body: SingleChildScrollView(
-        // Tambahkan SingleChildScrollView di sini
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -46,10 +47,9 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
               ),
               const SizedBox(height: 16.0),
               SizedBox(
-                width: 200, // Atur lebar gambar sesuai kebutuhan Anda
-                height: 200, // Atur tinggi gambar sesuai kebutuhan Anda
-                child: Image.asset(
-                    'assets/logo1.png'), // Ubah path gambar sesuai dengan direktori dan nama file gambar Anda
+                width: 200,
+                height: 200,
+                child: Image.asset('assets/logo1.png'),
               ),
               TextFormField(
                 controller: _emailController,
@@ -84,13 +84,58 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Implement login logic
+                    Map<String, dynamic> userData = {
+                      'email': _emailController.text,
+                      'namalengkap': _nameController.text,
+                      'username': _usernameController.text,
+                      'password': _passwordController.text,
+                    };
+
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .add(userData)
+                        .then((value) {
+                      // Proses berhasil
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Berhasil'),
+                            content:
+                                const Text('Data pengguna berhasil disimpan!'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }).catchError((error) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Gagal'),
+                            content: Text(
+                                'Terjadi kesalahan saat menyimpan data pengguna: $error'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    });
                   },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors
-                        .blue, // Atur warna latar belakang tombol menjadi ungu
-                  ),
-                  child: const Text('Registrasi'),
+                  child: Text("Registrasi"),
                 ),
               ),
               Text('Sudah memiliki akun?'),

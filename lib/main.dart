@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'splash_screen.dart';
+import 'kelas/buat_kelas.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Amikom Course App',
+      title: 'Task Learn',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

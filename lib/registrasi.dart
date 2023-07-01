@@ -22,7 +22,6 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
         title: const Text('Login'),
       ),
       body: SingleChildScrollView(
-        // Tambahkan SingleChildScrollView di sini
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -46,10 +45,9 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
               ),
               const SizedBox(height: 16.0),
               SizedBox(
-                width: 200, // Atur lebar gambar sesuai kebutuhan Anda
-                height: 200, // Atur tinggi gambar sesuai kebutuhan Anda
-                child: Image.asset(
-                    'assets/logo1.png'), // Ubah path gambar sesuai dengan direktori dan nama file gambar Anda
+                width: 200,
+                height: 200,
+                child: Image.asset('assets/logo1.png'),
               ),
               TextFormField(
                 controller: _emailController,
@@ -87,8 +85,7 @@ class _RegistrasiPageState extends State<RegistrasiPage> {
                     // TODO: Implement login logic
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors
-                        .blue, // Atur warna latar belakang tombol menjadi ungu
+                    primary: Colors.blue,
                   ),
                   child: const Text('Registrasi'),
                 ),

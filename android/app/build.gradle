@@ -49,6 +49,8 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 19
         targetSdkVersion 20
+        flutter.minSdkVersion
+        flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -63,7 +65,7 @@ android {
     }
     lintOptions {
     warningsAsErrors true
-    additionalParams '-Xlint:unchecked'
+    
   }
 }
 

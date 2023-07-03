@@ -5,6 +5,7 @@ import 'splash_screen.dart';
 import 'kelas/buat_kelas.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

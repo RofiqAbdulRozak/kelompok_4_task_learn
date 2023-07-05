@@ -5,12 +5,12 @@ import 'firebase_options.dart';
 import 'splash_screen.dart';
 import 'kelas/buat_kelas.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       ),
       home: splash(),
       routes: {
-        '/login': (context) => LoginPage(), //  LoginPage
-        '/buat_kelas': (context) => buat_kelas(), // buat_kelas
+        '/login': (context) => LoginPage(),
+        '/buat_kelas': (context) => buat_kelas(),
       },
     );
   }

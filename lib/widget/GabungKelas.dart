@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 void main(List<String> args) {
   runApp(GabungKelas1());
 }
@@ -23,6 +25,7 @@ class GabungKelas extends StatefulWidget {
 }
 
 class _GabungKelasState extends State<GabungKelas> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,7 @@ class _GabungKelasState extends State<GabungKelas> {
           },
         ),
         title: Text("GABUNG KELAS"),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 4, right: 4, top: 20),
@@ -45,7 +48,7 @@ class _GabungKelasState extends State<GabungKelas> {
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
-                color: Colors.teal,
+                color: Colors.blue,
               ),
               ),
             ),
@@ -55,7 +58,7 @@ class _GabungKelasState extends State<GabungKelas> {
                 labelText: 'Kode Kelas',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.teal,
+                    color: Colors.blue,
                     width: 2.0,
                     style: BorderStyle.solid
                   ),
@@ -68,7 +71,7 @@ class _GabungKelasState extends State<GabungKelas> {
                 //logika (kode)
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.teal,
+                primary: Colors.blue,
               ),
               child: Text("GABUNG KELAS"),)
           ],

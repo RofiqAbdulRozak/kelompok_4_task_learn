@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'kelas/menu_daftar_kelas.dart';
 import 'notes/menu_daftar_notes.dart';
-// import 'tugas/menu_daftar_tugas.dart';
+import 'widget/menu_daftar_tugas.dart';
 // import 'tanggal/menu_tanggal.dart';
-import 'package:intl/intl.dart';
+import 'profile/my_profile.dart';
 
 class menu_utama extends StatefulWidget {
   const menu_utama({Key? key}) : super(key: key);
@@ -14,11 +16,19 @@ class menu_utama extends StatefulWidget {
 }
 
 class _menu_utamaState extends State<menu_utama> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   DateTime currentDate = DateTime.now();
   DateFormat dateFormat = DateFormat('dd MMMM yyyy');
+  Future<String?> getUsername(String userID) async {
+    DocumentSnapshot userSnapshot =
+        await firestore.collection('users').doc(userID).get();
+    return userSnapshot['username'];
+  }
 
   @override
   Widget build(BuildContext context) {
+    User? user = auth.currentUser;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -38,21 +48,34 @@ class _menu_utamaState extends State<menu_utama> {
                 ),
               ),
             ),
-            Container(
-              height: 100,
-              width: screenWidth,
-              margin: EdgeInsets.only(
-                top: 50,
-                left: 30,
-              ),
-              child: Text(
-                "Hai Rofiq",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
+            FutureBuilder<String?>(
+              future: getUsername(user!.uid),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  String? username = snapshot.data;
+                  return Container(
+                    height: 100,
+                    width: screenWidth,
+                    margin: EdgeInsets.only(
+                      top: 50,
+                      left: 30,
+                    ),
+                    child: Text(
+                      "Hai $username",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                }
+              },
             ),
+
             Container(
               height: 50,
               width: 50,
@@ -62,10 +85,10 @@ class _menu_utamaState extends State<menu_utama> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -212,10 +235,10 @@ class _menu_utamaState extends State<menu_utama> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => menu_daftar_tugas()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DaftarTugas()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'buat_notes.dart';
-// import 'tampil_notes.dart';
+import 'tampil_notes.dart';
 
 class menu_daftar_notes extends StatefulWidget {
   const menu_daftar_notes({Key? key});
@@ -12,10 +12,10 @@ class menu_daftar_notes extends StatefulWidget {
 
 class _menu_daftar_notesState extends State<menu_daftar_notes> {
   void navigateToTampilNotes(String noteId) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => tampil_notes(noteId: noteId)),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => tampil_notes(noteId: noteId)),
+    );
   }
 
   @override

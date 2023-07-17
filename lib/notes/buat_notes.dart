@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'menu_daftar_notes.dart';
 
 class buat_notes extends StatefulWidget {
@@ -7,6 +8,12 @@ class buat_notes extends StatefulWidget {
 }
 
 class _buat_notesState extends State<buat_notes> {
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _descriptioController = TextEditingController();
+  TextEditingController _colorController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String message = '';
   String title = '';
   String description = '';
   String selectedColor = 'Red';
@@ -29,6 +36,15 @@ class _buat_notesState extends State<buat_notes> {
   }
 
   @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptioController.dispose();
+    _colorController.dispose();
+    _dateController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +56,7 @@ class _buat_notesState extends State<buat_notes> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
+              controller: _titleController,
               onChanged: (value) {
                 setState(() {
                   title = value;
@@ -52,6 +69,7 @@ class _buat_notesState extends State<buat_notes> {
             ),
             SizedBox(height: 16.0),
             TextField(
+              controller: _descriptioController,
               onChanged: (value) {
                 setState(() {
                   description = value;
@@ -92,6 +110,15 @@ class _buat_notesState extends State<buat_notes> {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
+                Map<String, dynamic> saveDataNotes = {
+                  'Judul': _titleController.text,
+                  'Description': _descriptioController.text,
+                  'Color': selectedColor,
+                  'Date': selectedDate,
+                };
+                FirebaseFirestore.instance
+                    .collection('Notes')
+                    .add(saveDataNotes);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

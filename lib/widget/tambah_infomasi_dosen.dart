@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-
-void main() {
-  runApp(TambahInformasi1());
-}
-
-class TambahInformasi1 extends StatelessWidget {
-  const TambahInformasi1({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TambahInformasi(),
-    );
-  }
-}
+import 'package:firebase_core/firebase_core.dart'; // Import package firebase_core
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TambahInformasi extends StatefulWidget {
   const TambahInformasi({Key? key}) : super(key: key);
@@ -53,6 +42,43 @@ class _TambahInformasiState extends State<TambahInformasi> {
           );
         });
       }
+    }
+  }
+
+  // Fungsi untuk menyimpan data ke Firestore
+  Future<void> _uploadFileAndSaveData(String jenisInformasi, String judul,
+      String deskripsi, String filePath, DateTime? tenggatWaktu) async {
+    try {
+      // Inisialisasi Firebase jika belum dilakukan
+      await Firebase.initializeApp();
+
+      // Akses koleksi 'informasi' di Firestore, gantilah dengan nama koleksi yang sesuai dengan struktur database Anda
+      CollectionReference informasiCollection =
+          FirebaseFirestore.instance.collection('informasi');
+
+      // Buat sebuah dokumen baru di koleksi 'informasi'
+      await informasiCollection.add({
+        'jenis_informasi': jenisInformasi,
+        'judul': judul,
+        'deskripsi': deskripsi,
+        'file_path': filePath,
+        'tenggat_waktu': tenggatWaktu,
+      });
+
+      // Tampilkan pop-up pesan berhasil
+      Fluttertoast.showToast(
+          msg: 'Data berhasil disimpan ke Firestore.',
+          backgroundColor: Colors.green,
+          textColor: Colors.white);
+    } catch (e) {
+      // Tangani jika terjadi kesalahan saat menyimpan data
+      print('Error: $e');
+// Tampilkan pop-up pesan kesalahan
+      Fluttertoast.showToast(
+        msg: 'Terjadi kesalahan saat menyimpan data.',
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
     }
   }
 
@@ -163,7 +189,8 @@ class _TambahInformasiState extends State<TambahInformasi> {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue, width: 2.0),
                         borderRadius: BorderRadius.circular(4),
@@ -236,7 +263,15 @@ class _TambahInformasiState extends State<TambahInformasi> {
               SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  //logika (kode)
+                  // Panggil fungsi untuk menyimpan data ke Firestore
+                  _uploadFileAndSaveData(
+                    selectedOption ?? '', // Jenis Informasi
+                    'Judul yang diinputkan', // Ganti dengan nilai judul yang sesuai dari inputan pengguna
+                    'Deskripsi yang diinputkan', // Ganti dengan nilai deskripsi yang sesuai dari inputan pengguna
+                    filePath ??
+                        '', // File Path, gunakan nilai filePath yang sudah didapatkan dari fungsi showPicker()
+                    selectedDateTime, // Tenggat Waktu, gunakan nilai selectedDateTime dari inputan pengguna
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,

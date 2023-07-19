@@ -10,7 +10,9 @@ import 'widget/GabungKelas.dart';
 import 'widget/lihat_tugas_dosen.dart';
 import 'widget/menu_daftar_tugas.dart';
 import 'widget/tambah_infomasi_dosen.dart';
-
+import 'widget/tampil_buat_kelas.dart';
+import 'widget/lihat_tugas_dosen.dart';
+import 'widget/lihat_tugas_mahasiswa.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: splash(),
+      
+      home: TugasMahasiswa(namaGuru: '', namaKelas: '',),
       routes: {
         '/login': (context) => LoginPage(),
         '/buat_kelas': (context) => buat_kelas(),

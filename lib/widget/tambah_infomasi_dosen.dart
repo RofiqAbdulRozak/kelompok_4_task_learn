@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
 class TambahInformasi extends StatefulWidget {
   const TambahInformasi({Key? key}) : super(key: key);
 
@@ -99,7 +100,9 @@ class _TambahInformasiState extends State<TambahInformasi> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Text("TAMBAH INFORMASI"),
         backgroundColor: Colors.blue,

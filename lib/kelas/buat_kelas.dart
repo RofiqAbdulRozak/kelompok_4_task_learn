@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:random_string/random_string.dart';
 
+import 'menu_daftar_kelas.dart';
+
 class buat_kelas extends StatefulWidget {
   const buat_kelas({Key? key}) : super(key: key);
 
@@ -132,7 +134,9 @@ class _buat_kelasState extends State<buat_kelas> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            menu_daftar_kelas();
+          },
         ),
         title: const Text('Buat Kelas'),
         actions: [

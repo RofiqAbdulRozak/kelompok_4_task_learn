@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'buat_kelas.dart';
 import '/widget/lihat_tugas_dosen.dart';
+import '/widget/GabungKelas.dart';
 // import 'tampil_notes.dart';
 
 class menu_daftar_kelas extends StatefulWidget {
@@ -12,6 +13,32 @@ class menu_daftar_kelas extends StatefulWidget {
 }
 
 class _menu_daftar_kelasState extends State<menu_daftar_kelas> {
+  void _showBuatKelasDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Buat Kelas"),
+          content: Text("Anda akan membuat kelas baru."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Buat"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Batal"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void navigateTolihat_tugas_dosen(String idkelas, String matakuliah) {
     Navigator.push(
       context,
@@ -32,9 +59,42 @@ class _menu_daftar_kelasState extends State<menu_daftar_kelas> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => buat_kelas()),
+              // Tampilkan dialog pilihan
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Pilihan"),
+                    content: Text(
+                        "Apakah Anda ingin gabung kelas atau buat kelas baru?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          _showBuatKelasDialog();
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GabungKelas()),
+                          );
+                        },
+                        child: Text("Gabung Kelas"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _showBuatKelasDialog();
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => buat_kelas()),
+                          );
+                        },
+                        child: Text("Buat Kelas"),
+                      ),
+                    ],
+                  );
+                },
               );
             },
             icon: Icon(Icons.add),

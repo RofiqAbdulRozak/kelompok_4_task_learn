@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'kelas/menu_daftar_kelas.dart';
+import 'kelas/menu_daftar_kelas.dart';
 import 'notes/menu_daftar_notes.dart';
 import 'widget/menu_daftar_tugas.dart';
 // import 'tanggal/menu_tanggal.dart';
@@ -152,11 +152,11 @@ class _menu_utamaState extends State<menu_utama> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => menu_daftar_kelas()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => menu_daftar_kelas()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

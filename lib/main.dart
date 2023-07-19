@@ -4,6 +4,7 @@ import 'package:kelompok_4_task_learn/login.dart';
 import 'firebase_options.dart';
 import 'splash_screen.dart';
 import 'kelas/buat_kelas.dart';
+import 'kelas/menu_daftar_kelas.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginPage(),
         '/buat_kelas': (context) => buat_kelas(),
+        '/menu_daftar_kelas': (context) => menu_daftar_kelas(),
       },
     );
   }

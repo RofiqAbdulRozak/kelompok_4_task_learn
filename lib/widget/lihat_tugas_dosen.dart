@@ -1,23 +1,55 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'tambah_infomasi_dosen.dart';
 import 'tampil_buat_kelas.dart';
+import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class lihat_tugas_dosen extends StatefulWidget {
-  const lihat_tugas_dosen({Key? key}) : super(key: key);
+  final String namaKelas;
+  final String namaGuru;
+
+  const lihat_tugas_dosen(
+      {Key? key, required this.namaKelas, required this.namaGuru})
+      : super(key: key);
 
   @override
   _lihat_tugas_dosenState createState() => _lihat_tugas_dosenState();
 }
 
 class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
+  // final screenWidth = MediaQuery.of(context).size.width;
+  // final String namaKelas = widget.namaKelas;
+  // final String namaGuru = widget.namaGuru;
+  // final String mataKuliah = '';
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  List<Kelas> daftarKelas = [];
+
+  void navigateToLihatTugasDosen(String kelas, String namaGuru) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => lihat_tugas_dosen(
+          namaKelas: kelas,
+          namaGuru: namaGuru,
+          // mataKuliah: mataKuliah,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    User? user = auth.currentUser;
+    String? email = user?.email;
     final screenWidth = MediaQuery.of(context).size.width;
+    final String namaKelas = widget.namaKelas;
+    final String namaGuru = widget.namaGuru;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bahasa Inggris Lanjut"),
+        title: Text(namaKelas),
         backgroundColor: Colors.amber[700],
       ),
       body: SingleChildScrollView(
@@ -41,7 +73,7 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
                 left: 30,
               ),
               child: Text(
-                "Hai Dini",
+                "Hai, $email",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -90,7 +122,7 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Bahasa Inggris Lanjut\nIF21A\nDini Riandini",
+                        namaKelas,
                         style: TextStyle(
                           fontSize: 17,
                           color: Colors.amber[700],
@@ -249,6 +281,34 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+Future<void> fetchDataKelas() async {
+  try {
+    final QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('kelas').get();
+    daftarKelas = querySnapshot.docs
+        .map((doc) => Kelas.fromFirestore(doc.data() as Map<String, dynamic>))
+        .toList();
+  } catch (e) {
+    print('Error fetching data: $e');
+  }
+}
+
+List<Kelas> daftarKelas = [];
+
+class Kelas {
+  final String namaKelas;
+  final String namaGuru;
+
+  Kelas({required this.namaKelas, required this.namaGuru});
+
+  factory Kelas.fromFirestore(Map<String, dynamic> data) {
+    return Kelas(
+      namaKelas: data['namaKelas'],
+      namaGuru: data['namaGuru'],
     );
   }
 }

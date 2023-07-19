@@ -81,7 +81,8 @@ class _buat_kelasState extends State<buat_kelas> {
               actions: [
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.pushReplacementNamed(context, '/menu_utama');
+                    Navigator.pushReplacementNamed(
+                        context, '/menu_daftar_kelas');
                   },
                   child: const Text('OK'),
                 ),

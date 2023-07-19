@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'buat_kelas.dart';
+import '/widget/lihat_tugas_dosen.dart';
 // import 'tampil_notes.dart';
 
 class menu_daftar_kelas extends StatefulWidget {
@@ -11,18 +12,34 @@ class menu_daftar_kelas extends StatefulWidget {
 }
 
 class _menu_daftar_kelasState extends State<menu_daftar_kelas> {
-  // void navigateToTampilNotes(String noteId) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => tampil_notes(noteId: noteId)),
-  //   );
-  // }
+  void navigateTolihat_tugas_dosen(String idkelas, String matakuliah) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => lihat_tugas_dosen(
+          namaKelas: idkelas,
+          namaGuru: '',
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Daftar kelas"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => buat_kelas()),
+              );
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -66,7 +83,7 @@ class _menu_daftar_kelasState extends State<menu_daftar_kelas> {
                   final matakuliah = kelasData['matakuliah'];
 
                   return InkWell(
-                    // onTap: () => navigateToTampilNotes(noteId),
+                    onTap: () => navigateTolihat_tugas_dosen(kelas, matakuliah),
                     child: Container(
                       height: 100,
                       margin: EdgeInsets.only(bottom: 16),

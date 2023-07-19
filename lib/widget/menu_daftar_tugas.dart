@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'buat_kelas.dart';
 
-void main(List<String> args) {
-  runApp(DaftarTugas1());
-}
-
-class DaftarTugas1 extends StatelessWidget {
-  const DaftarTugas1({Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DaftarTugas(),
-    );
-  }
-}
 
 class DaftarTugas extends StatefulWidget {
   const DaftarTugas({Key? key});
@@ -23,13 +11,12 @@ class DaftarTugas extends StatefulWidget {
 }
 
 class _DaftarTugasState extends State<DaftarTugas> {
-  void navigateToTugasMahasiswa() {
-    // Navigasi ke halaman "TUGAS MAHASISWA" ketika teks diklik
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TugasMahasiswa()),
-    );
-  }
+  // void navigateToTampilNotes(String noteId) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => tampil_notes(noteId: noteId)),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,91 +24,107 @@ class _DaftarTugasState extends State<DaftarTugas> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: (){
+            Navigator.pop(context);
+          },
         ),
-        title: Text("Daftar Tugas"),
+        title: Text("DAFTAR TUGAS"),
         backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 4, right: 4, top: 30),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                "TUGAS BARU",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(
+              top: 30,
+              left: 30,
+            ),
+            child: Text(
+              "Daftar Tugas",
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.blue,
               ),
             ),
-            SizedBox(height: 20),
-            InkWell(
-              onTap: navigateToTugasMahasiswa, // Menggunakan InkWell untuk membuat teks dapat diklik
-              child: Container(
-                width: 350,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('informasikelas').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+
+              final tugasDocs = snapshot.data!.docs;
+
+              return ListView.builder(
+                padding: EdgeInsets.only(
+                  top: 120,
+                  left: 30,
+                  right: 30,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.assessment,
-                        color: Colors.white,
-                        size: 80,
+                itemCount: tugasDocs.length,
+                itemBuilder: (context, index) {
+                  final tugasData =
+                      tugasDocs[index].data() as Map<String, dynamic>;
+                  final judul = tugasData['judul'];
+                  final deskripsi = tugasData['deskripsi'];
+
+                  return InkWell(
+                    // onTap: () => navigateToTampilNotes(noteId),
+                    child: Container(
+                      height: 100,
+                      margin: EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            'TUGAS BARU: Pertemuan 1',
-                            style: TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.bold,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.class_,
                               color: Colors.white,
+                              size: 80,
                             ),
                           ),
-                        ),
-                        Text(
-                          'Tenggat: 10 Juli 2023',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TugasMahasiswa extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tugas Mahasiswa'),
-        backgroundColor: Colors.blue,
-      ),
-      body: Center(
-        child: Text('Halaman Tugas Mahasiswa'),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  '$judul',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '$deskripsi',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
   }

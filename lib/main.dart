@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kelompok_4_task_learn/login.dart';
+import 'package:kelompok_4_task_learn/menu_utama.dart';
+import 'kelas/menu_daftar_kelas.dart';
 import 'firebase_options.dart';
 import 'splash_screen.dart';
 import 'kelas/buat_kelas.dart';
-import 'kelas/menu_daftar_kelas.dart';
+import 'widget/GabungKelas.dart';
+import 'widget/lihat_tugas_dosen.dart';
+import 'widget/menu_daftar_tugas.dart';
+import 'widget/tambah_infomasi_dosen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

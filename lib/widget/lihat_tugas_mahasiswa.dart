@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'tambah_infomasi_dosen.dart';
 import 'tampil_buat_kelas.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class lihat_tugas_dosen extends StatefulWidget {
+class TugasMahasiswa extends StatefulWidget {
   final String namaKelas;
   final String namaGuru;
 
-  const lihat_tugas_dosen(
-      {Key? key, required this.namaKelas, required this.namaGuru})
+  const TugasMahasiswa({Key? key, required this.namaKelas, required this.namaGuru})
       : super(key: key);
 
   @override
-  _lihat_tugas_dosenState createState() => _lihat_tugas_dosenState();
+  _TugasMahasiswaState createState() => _TugasMahasiswaState();
 }
 
-class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
-  // final screenWidth = MediaQuery.of(context).size.width;
-  // final String namaKelas = widget.namaKelas;
-  // final String namaGuru = widget.namaGuru;
-  // final String mataKuliah = '';
+class _TugasMahasiswaState extends State<TugasMahasiswa> {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  List<Kelas> daftarKelas = [];
 
-  void navigateToLihatTugasDosen(String kelas, String namaGuru) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => lihat_tugas_dosen(
-          namaKelas: kelas,
-          namaGuru: namaGuru,
-          // mataKuliah: mataKuliah,
-        ),
-      ),
-    );
+  @override
+  void initState() {
+    super.initState();
+    fetchDataKelas();
+  }
+
+  Future<void> fetchDataKelas() async {
+    try {
+      final QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('kelas').get();
+      List<Kelas> fetchedKelas = querySnapshot.docs
+          .map((doc) => Kelas.fromFirestore(doc.data() as Map<String, dynamic>))
+          .toList();
+      setState(() {
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
   }
 
   @override
@@ -52,7 +52,7 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            
+            Navigator.pop(context);
           },
         ),
         title: Text(namaKelas),
@@ -162,8 +162,7 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => tampil_buat_kelas()),
+                        MaterialPageRoute(builder: (context) => tampil_buat_kelas()),
                       );
                     },
                     child: Column(
@@ -260,50 +259,12 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
                 ),
               ),
             ),
-            Container(
-              height: 50,
-              width: 50,
-              margin: EdgeInsets.only(
-                top: 320,
-                left: screenWidth - 100,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TambahInformasi()),
-                  );
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(25),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
 }
-
-Future<void> fetchDataKelas() async {
-  try {
-    final QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('kelas').get();
-    daftarKelas = querySnapshot.docs
-        .map((doc) => Kelas.fromFirestore(doc.data() as Map<String, dynamic>))
-        .toList();
-  } catch (e) {
-    print('Error fetching data: $e');
-  }
-}
-
-List<Kelas> daftarKelas = [];
 
 class Kelas {
   final String namaKelas;

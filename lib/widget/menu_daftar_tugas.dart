@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kelompok_4_task_learn/widget/lihat_tugas_mahasiswa.dart';
+import 'tampil_buat_kelas.dart';
+import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'buat_kelas.dart';
 
 
@@ -73,7 +77,16 @@ class _DaftarTugasState extends State<DaftarTugas> {
                   final deskripsi = tugasData['deskripsi'];
 
                   return InkWell(
-                    // onTap: () => navigateToTampilNotes(noteId),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TugasMahasiswa(
+                            namaKelas: judul, 
+                            namaGuru: 'Nama Guru'),
+                        )
+                      );
+                    },
                     child: Container(
                       height: 100,
                       margin: EdgeInsets.only(bottom: 16),

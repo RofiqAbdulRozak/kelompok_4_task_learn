@@ -28,11 +28,6 @@ class MyProfilePage extends StatelessWidget {
     print('Buka About Me');
   }
 
-  // Future<void> logout() async {
-  //   await auth.signOut();
-  //   Navigator.pushReplacementNamed(context, '/login');
-  // }
-
   Future<String?> getUsername(String userID) async {
     DocumentSnapshot userSnapshot =
         await firestore.collection('users').doc(userID).get();
@@ -107,14 +102,15 @@ class MyProfilePage extends StatelessWidget {
                 }
               },
             ),
-            SizedBox(height: 10),
-            // if (email != null) Text('Email: $email'),
             SizedBox(height: 40),
             ListTile(
               leading: Icon(Icons.edit, color: Colors.teal),
               title: Text('Ubah Profile', style: TextStyle(color: Colors.teal)),
               onTap: () {
-                editProfile(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                );
               },
             ),
             ListTile(

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'kelas/menu_daftar_kelas.dart';
 import 'notes/menu_daftar_notes.dart';
 import 'widget/menu_daftar_tugas.dart';
-// import 'tanggal/menu_tanggal.dart';
+import 'tanggal/menu_tanggal.dart';
 import 'profile/my_profile.dart';
 
 class menu_utama extends StatefulWidget {
@@ -273,10 +273,10 @@ class _menu_utamaState extends State<menu_utama> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => menu_tanggal()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => menu_tanggal()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

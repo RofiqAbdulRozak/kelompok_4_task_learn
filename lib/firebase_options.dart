@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     projectId: 'task-learn-a944a',
     databaseURL: 'https://task-learn-a944a-default-rtdb.firebaseio.com',
     storageBucket: 'task-learn-a944a.appspot.com',
-    iosClientId: '673463292336-4aso0htfqn0nfl4bcdui6l8ghokmkkql.apps.googleusercontent.com',
+    iosClientId:
+        '673463292336-4aso0htfqn0nfl4bcdui6l8ghokmkkql.apps.googleusercontent.com',
     iosBundleId: 'com.example.kelompok4TaskLearn',
   );
 
@@ -81,7 +82,8 @@ class DefaultFirebaseOptions {
     projectId: 'task-learn-a944a',
     databaseURL: 'https://task-learn-a944a-default-rtdb.firebaseio.com',
     storageBucket: 'task-learn-a944a.appspot.com',
-    iosClientId: '673463292336-4aso0htfqn0nfl4bcdui6l8ghokmkkql.apps.googleusercontent.com',
+    iosClientId:
+        '673463292336-4aso0htfqn0nfl4bcdui6l8ghokmkkql.apps.googleusercontent.com',
     iosBundleId: 'com.example.kelompok4TaskLearn',
   );
 }

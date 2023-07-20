@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../profile/my_profile.dart';
+import 'anggota_mahasiswa.dart';
 import 'tampil_buat_kelas.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +10,8 @@ class TugasMahasiswa extends StatefulWidget {
   final String namaKelas;
   final String namaGuru;
 
-  const TugasMahasiswa({Key? key, required this.namaKelas, required this.namaGuru})
+  const TugasMahasiswa(
+      {Key? key, required this.namaKelas, required this.namaGuru})
       : super(key: key);
 
   @override
@@ -32,8 +35,7 @@ class _TugasMahasiswaState extends State<TugasMahasiswa> {
       List<Kelas> fetchedKelas = querySnapshot.docs
           .map((doc) => Kelas.fromFirestore(doc.data() as Map<String, dynamic>))
           .toList();
-      setState(() {
-      });
+      setState(() {});
     } catch (e) {
       print('Error fetching data: $e');
     }
@@ -95,10 +97,10 @@ class _TugasMahasiswaState extends State<TugasMahasiswa> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -162,7 +164,8 @@ class _TugasMahasiswaState extends State<TugasMahasiswa> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => tampil_buat_kelas()),
+                        MaterialPageRoute(
+                            builder: (context) => tampil_buat_kelas()),
                       );
                     },
                     child: Column(
@@ -221,11 +224,11 @@ class _TugasMahasiswaState extends State<TugasMahasiswa> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => anggota_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AnggotaMahasiswa()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

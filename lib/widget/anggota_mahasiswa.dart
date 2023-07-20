@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../profile/my_profile.dart';
+import 'tampil_buat_kelas.dart';
 
 class AnggotaMahasiswa extends StatefulWidget {
   const AnggotaMahasiswa({Key? key}) : super(key: key);
@@ -17,28 +19,6 @@ class _AnggotaMahasiswaState extends State<AnggotaMahasiswa> {
     fetchAnggotaKelas();
   }
 
-  // void fetchAnggotaKelas() async {
-  //   try {
-  //     var querySnapshot =
-  //         await FirebaseFirestore.instance.collection('anggota').get();
-
-  //     List<String> anggotaWithNamaLengkap = [];
-
-  //     for (var doc in querySnapshot.docs) {
-  //       var iduser = doc['iduser']; // Ambil iduser dari tabel 'anggota'
-  //       var namalengkap = await getNamaLengkapByid(iduser);
-  //       if (namalengkap != null) {
-  //         anggotaWithNamaLengkap.add(namalengkap);
-  //       }
-  //     }
-
-  //     setState(() {
-  //       anggotaKelas = anggotaWithNamaLengkap;
-  //     });
-  //   } catch (e) {
-  //     print('Error fetching data: $e');
-  //   }
-  // }
   void fetchAnggotaKelas() async {
     try {
       var querySnapshot =
@@ -129,10 +109,10 @@ class _AnggotaMahasiswaState extends State<AnggotaMahasiswa> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -194,11 +174,11 @@ class _AnggotaMahasiswaState extends State<AnggotaMahasiswa> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => tampil_buat_kelas()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => tampil_buat_kelas()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

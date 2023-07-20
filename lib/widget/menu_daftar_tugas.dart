@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kelompok_4_task_learn/widget/lihat_tugas_mahasiswa.dart';
-import 'tampil_buat_kelas.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'buat_kelas.dart';
-
 
 class DaftarTugas extends StatefulWidget {
   const DaftarTugas({Key? key});
@@ -15,20 +12,13 @@ class DaftarTugas extends StatefulWidget {
 }
 
 class _DaftarTugasState extends State<DaftarTugas> {
-  // void navigateToTampilNotes(String noteId) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => tampil_notes(noteId: noteId)),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
         ),
@@ -51,7 +41,9 @@ class _DaftarTugasState extends State<DaftarTugas> {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('informasikelas').snapshots(),
+            stream: FirebaseFirestore.instance
+                .collection('informasikelas')
+                .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
@@ -79,13 +71,11 @@ class _DaftarTugasState extends State<DaftarTugas> {
                   return InkWell(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TugasMahasiswa(
-                            namaKelas: judul, 
-                            namaGuru: 'Nama Guru'),
-                        )
-                      );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TugasMahasiswa(
+                                namaKelas: judul, namaGuru: 'Nama Guru'),
+                          ));
                     },
                     child: Container(
                       height: 100,

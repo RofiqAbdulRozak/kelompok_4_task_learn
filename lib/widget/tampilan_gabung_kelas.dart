@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../profile/my_profile.dart';
+import 'anggota_mahasiswa.dart';
+import 'lihat_tugas_dosen.dart';
+import 'tampil_buat_kelas.dart';
 
 class tampil_gabung_kelas extends StatefulWidget {
   const tampil_gabung_kelas({Key? key}) : super(key: key);
@@ -53,10 +57,10 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -118,11 +122,11 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => tampil_buat_kelas()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => tampil_buat_kelas()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -152,11 +156,14 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => lihat_tugas_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => lihat_tugas_dosen(
+                                  namaGuru: '',
+                                  namaKelas: '',
+                                )),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -186,11 +193,11 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => anggota_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AnggotaMahasiswa()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

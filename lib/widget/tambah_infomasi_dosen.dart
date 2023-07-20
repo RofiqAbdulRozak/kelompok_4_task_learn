@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class TambahInformasi extends StatefulWidget {
   const TambahInformasi({Key? key}) : super(key: key);
 

@@ -27,23 +27,22 @@ class _TugasDosenState extends State<TugasDosen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Bahasa Inggris Lanjut",
-                style: TextStyle(fontSize: 24),
-              ),
-            ],
-          ),
-          backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {},
         ),
-      
-      body:  SingleChildScrollView(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Bahasa Inggris Lanjut",
+              style: TextStyle(fontSize: 24),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.blue,
+      ),
+      body: SingleChildScrollView(
         child: Stack(
           children: <Widget>[
             Container(
@@ -147,7 +146,6 @@ class _TugasDosenState extends State<TugasDosen> {
                     ),
                   ),
                 ],
-                
               ),
             ),
           ],
@@ -156,4 +154,3 @@ class _TugasDosenState extends State<TugasDosen> {
     );
   }
 }
-    

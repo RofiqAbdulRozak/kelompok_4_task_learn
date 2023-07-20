@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import '../profile/my_profile.dart';
+import 'anggota_dosen.dart';
+import 'lihat_tugas_dosen.dart';
 import 'tambah_infomasi_dosen.dart';
 
 class tampil_buat_kelas extends StatefulWidget {
@@ -56,10 +58,10 @@ class _tampil_buat_kelasState extends State<tampil_buat_kelas> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -149,11 +151,14 @@ class _tampil_buat_kelasState extends State<tampil_buat_kelas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => lihat_tugas_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => lihat_tugas_dosen(
+                                  namaGuru: '',
+                                  namaKelas: '',
+                                )),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -183,11 +188,11 @@ class _tampil_buat_kelasState extends State<tampil_buat_kelas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => anggota_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => anggota_dosen()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

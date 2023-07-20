@@ -44,34 +44,6 @@ class _GabungKelasState extends State<GabungKelas> {
     return 'IDK001';
   }
 
-  // String getIdUser() {
-  //   return 'USER001';
-  // }
-
-  // Future<String?> getIdKelasByKodeKelas(String kodekelas) async {
-  //   try {
-  //     var querySnapshot = await FirebaseFirestore.instance
-  //         .collection('kelas')
-  //         .where('kodekelas', isEqualTo: kodekelas)
-  //         .limit(1)
-  //         .get();
-
-  //     if (querySnapshot.docs.isNotEmpty) {
-  //       // Jika ditemukan data yang sesuai dengan kodekelas
-  //       var data = querySnapshot.docs.first.data();
-  //       var idkelas = data['idkelas'] as String?;
-  //       return idkelas;
-  //     } else {
-  //       // Jika tidak ditemukan data dengan kodekelas yang sesuai
-  //       print('Data Kode Kelas Tidak Ditemukan: $kodekelas');
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     print('Error fetching data: $e');
-  //     return null;
-  //   }
-  // }
-
   Future<String?> getIdUser() async {
     var user = FirebaseAuth.instance.currentUser;
     if (user != null) {

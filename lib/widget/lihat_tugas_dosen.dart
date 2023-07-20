@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../profile/my_profile.dart';
+import 'anggota_dosen.dart';
 import 'tambah_infomasi_dosen.dart';
 import 'tampil_buat_kelas.dart';
 import 'dart:math';
@@ -18,10 +20,6 @@ class lihat_tugas_dosen extends StatefulWidget {
 }
 
 class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
-  // final screenWidth = MediaQuery.of(context).size.width;
-  // final String namaKelas = widget.namaKelas;
-  // final String namaGuru = widget.namaGuru;
-  // final String mataKuliah = '';
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<Kelas> daftarKelas = [];
@@ -33,7 +31,6 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
         builder: (context) => lihat_tugas_dosen(
           namaKelas: kelas,
           namaGuru: namaGuru,
-          // mataKuliah: mataKuliah,
         ),
       ),
     );
@@ -51,9 +48,7 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            
-          },
+          onPressed: () {},
         ),
         title: Text(namaKelas),
         backgroundColor: Colors.blue,
@@ -95,10 +90,10 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => my_profil()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyProfilePage()),
+                  );
                 },
                 icon: Icon(
                   Icons.person,
@@ -222,11 +217,11 @@ class _lihat_tugas_dosenState extends State<lihat_tugas_dosen> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => anggota_dosen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => anggota_dosen()),
+                      );
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

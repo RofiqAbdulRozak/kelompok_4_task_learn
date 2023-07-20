@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../profile/my_profile.dart';
 import 'anggota_mahasiswa.dart';
-import 'tampil_buat_kelas.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'tampilan_gabung_kelas.dart';
 
 class TugasMahasiswa extends StatefulWidget {
   final String namaKelas;
@@ -165,7 +166,7 @@ class _TugasMahasiswaState extends State<TugasMahasiswa> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => tampil_buat_kelas()),
+                            builder: (context) => tampil_gabung_kelas()),
                       );
                     },
                     child: Column(

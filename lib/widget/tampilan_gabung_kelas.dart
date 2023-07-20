@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../profile/my_profile.dart';
 import 'anggota_mahasiswa.dart';
-import 'lihat_tugas_dosen.dart';
-import 'tampil_buat_kelas.dart';
+import 'lihat_tugas_mahasiswa.dart';
 
 class tampil_gabung_kelas extends StatefulWidget {
   const tampil_gabung_kelas({Key? key}) : super(key: key);
@@ -121,13 +120,7 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => tampil_buat_kelas()),
-                      );
-                    },
+                    onPressed: () {},
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -159,7 +152,7 @@ class _tampil_gabung_kelasState extends State<tampil_gabung_kelas> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => lihat_tugas_dosen(
+                            builder: (context) => TugasMahasiswa(
                                   namaGuru: '',
                                   namaKelas: '',
                                 )),

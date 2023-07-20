@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../profile/my_profile.dart';
-import 'tampil_buat_kelas.dart';
+import 'lihat_tugas_mahasiswa.dart';
+import 'tampilan_gabung_kelas.dart';
 
 class AnggotaMahasiswa extends StatefulWidget {
   const AnggotaMahasiswa({Key? key}) : super(key: key);
@@ -177,7 +178,7 @@ class _AnggotaMahasiswaState extends State<AnggotaMahasiswa> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => tampil_buat_kelas()),
+                            builder: (context) => tampil_gabung_kelas()),
                       );
                     },
                     child: Column(
@@ -207,7 +208,16 @@ class _AnggotaMahasiswaState extends State<AnggotaMahasiswa> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TugasMahasiswa(
+                                  namaGuru: '',
+                                  namaKelas: '',
+                                )),
+                      );
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

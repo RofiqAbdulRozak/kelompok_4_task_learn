@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../profile/my_profile.dart';
+import 'lihat_tugas_dosen.dart';
 import 'tampil_buat_kelas.dart';
 
 class anggota_dosen extends StatefulWidget {
@@ -93,7 +94,7 @@ class _anggota_dosenState extends State<anggota_dosen> {
                 left: 30,
               ),
               child: Text(
-                "Hai Rofiq",
+                "Hai Dini",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -207,7 +208,16 @@ class _anggota_dosenState extends State<anggota_dosen> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => lihat_tugas_dosen(
+                                  namaGuru: '',
+                                  namaKelas: '',
+                                )),
+                      );
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
